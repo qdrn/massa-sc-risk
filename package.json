@@ -2,9 +2,9 @@
   "name": "risk",
   "version": "0.1.0",
   "scripts": {
-    "helloworld": "asc src/helloworld.ts --target release --exportRuntime --binaryFile build/helloworld.wasm",
+    "helloworld": "asc --transform json-as/transform src/helloworld.ts --target release --exportRuntime --binaryFile build/helloworld.wasm",
     "replaceIncludes": "node bin/include_base64.js src/createSC.ts",
-    "buildSC": "asc src/createSC.m.ts --target release --exportRuntime --binaryFile build/createSC.wasm",
+    "buildSC": "asc --transform json-as/transform src/createSC.m.ts --target release --exportRuntime --binaryFile build/createSC.wasm",
     "cleanSC": "rm src/createSC.m.ts",
     "createSC": "yarn run replaceIncludes && yarn run buildSC && yarn run cleanSC",
     "buildAll": "yarn run helloworld && yarn run createSC",
