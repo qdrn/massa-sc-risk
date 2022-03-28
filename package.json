@@ -1,0 +1,27 @@
+{
+  "name": "risk",
+  "version": "0.1.0",
+  "scripts": {
+    "helloworld": "asc src/helloworld.ts --target release --exportRuntime --binaryFile build/helloworld.wasm",
+    "replaceIncludes": "node bin/include_base64.js src/createSC.ts",
+    "buildSC": "asc src/createSC.m.ts --target release --exportRuntime --binaryFile build/createSC.wasm",
+    "cleanSC": "rm src/createSC.m.ts",
+    "createSC": "yarn run replaceIncludes && yarn run buildSC && yarn run cleanSC",
+    "buildAll": "yarn run helloworld && yarn run createSC",
+    "exec": "yarn run buildAll && ./bin/massa-sc-test ./build/createSC.wasm",
+    "buildTest": "asc src/mytest.ts --target release --exportRuntime --binaryFile build/mytest.wasm",
+    "execTest": "yarn run buildTest && ./bin/massa-sc-test ./build/mytest.wasm",
+    "clean": "rm -rf build && rm assembly/*.m.ts && rm ledger.json"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.19.20",
+    "jest": "^27.4.5"
+  },
+  "dependencies": {
+    "as-base58": "^0.1.1",
+    "as-hmac-sha2": "^1.0.2",
+    "json-as": "^0.2.6",
+    "massa-sc-std": "^2.0.0",
+    "visitor-as": "^0.6.0"
+  }
+}
